@@ -1,0 +1,18 @@
+on: [push]
+
+name: Build project
+
+jobs:
+  build_launcher_app:
+    name: Build launcher app
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+      - uses: actions-rs/cargo@v1
+        working-directory: ./launcher-app
+        with:
+          command: build
+          args: --release --all-features
