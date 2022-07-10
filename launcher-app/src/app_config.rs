@@ -8,24 +8,24 @@ pub(crate) struct PreLaunchSettings {
 
 #[derive(Debug)]
 pub(crate) struct ArmaSettings {
-    pub arma_binary: String,
-    pub arma_config: String,
-    pub arma_extra_params: String,
-    pub arma_profile: String,
-    pub arma_world: String,
-    pub arma_limitfps: String,
-    pub arma_headless_clients: String,
-    pub arma_load_mods: bool,
+    pub binary: String,
+    pub config: String,
+    pub extra_params: String,
+    pub profile: String,
+    pub world: String,
+    pub limitfps: String,
+    pub headless_clients: String,
+    pub load_mods: bool,
 }
 
 #[derive(Debug)]
 pub(crate) struct SteamSettings {
-    pub steam_branch: String,
-    pub steam_branch_password: String,
-    pub steam_user: String,
-    pub steam_password: String,
-    pub steam_guard_code: String,
-    pub steam_skip_install: bool,
+    pub branch: String,
+    pub branch_password: String,
+    pub user: String,
+    pub password: String,
+    pub guard_code: String,
+    pub skip_install: bool,
 }
 
 #[derive(Debug)]
@@ -44,22 +44,22 @@ pub(crate) fn parse_env_vars() -> AppConfig {
             mods_run_from_arma_dir: true,
         },
         arma: ArmaSettings {
-            arma_binary: "".to_string(),
-            arma_config: "".to_string(),
-            arma_extra_params: "".to_string(),
-            arma_headless_clients: "".to_string(),
-            arma_limitfps: "".to_string(),
-            arma_profile: "".to_string(),
-            arma_world: "".to_string(),
-            arma_load_mods: true,
+            binary: "".to_string(),
+            config: "".to_string(),
+            extra_params: "".to_string(),
+            headless_clients: "".to_string(),
+            limitfps: "".to_string(),
+            profile: "".to_string(),
+            world: "".to_string(),
+            load_mods: true,
         },
         steam: SteamSettings {
-            steam_branch: "".to_string(),
-            steam_user: "".to_string(),
-            steam_password: "".to_string(),
-            steam_guard_code: "".to_string(),
-            steam_skip_install: false,
-            steam_branch_password: "".to_string(),
+            branch: "".to_string(),
+            user: "".to_string(),
+            password: "".to_string(),
+            guard_code: "".to_string(),
+            skip_install: false,
+            branch_password: "".to_string(),
         },
     };
 
@@ -74,21 +74,21 @@ pub(crate) fn parse_env_vars() -> AppConfig {
                 if !is_standard_bin_name {
                     warn!("unusual binary name given: {}", value);
                 }
-                settings.arma.arma_binary = value
+                settings.arma.binary = value
             }
-            "ARMA_CONFIG" => settings.arma.arma_config = value,
-            "ARMA_EXTRA_PARAMS" => settings.arma.arma_extra_params = value,
-            "ARMA_HEADLESS_CLIENTS" => settings.arma.arma_headless_clients = value,
-            "ARMA_LIMITFPS" => settings.arma.arma_limitfps = value,
-            "ARMA_PROFILE" => settings.arma.arma_profile = value,
-            "ARMA_WORLD" => settings.arma.arma_world = value,
-            "ARMA_LOAD_MODS" => settings.arma.arma_load_mods = value == "true",
-            "STEAM_BRANCH" => settings.steam.steam_branch = value,
-            "STEAM_BRANCH_PASSWORD" => settings.steam.steam_branch_password = value,
-            "STEAM_USER" => settings.steam.steam_user = value,
-            "STEAM_PASSWORD" => settings.steam.steam_password = value,
-            "STEAM_GUARD_CODE" => settings.steam.steam_guard_code = value,
-            "STEAM_SKIP_INSTALL" => settings.steam.steam_skip_install = value == "true",
+            "ARMA_CONFIG" => settings.arma.config = value,
+            "ARMA_EXTRA_PARAMS" => settings.arma.extra_params = value,
+            "ARMA_HEADLESS_CLIENTS" => settings.arma.headless_clients = value,
+            "ARMA_LIMITFPS" => settings.arma.limitfps = value,
+            "ARMA_PROFILE" => settings.arma.profile = value,
+            "ARMA_WORLD" => settings.arma.world = value,
+            "ARMA_LOAD_MODS" => settings.arma.load_mods = value == "true",
+            "STEAM_BRANCH" => settings.steam.branch = value,
+            "STEAM_BRANCH_PASSWORD" => settings.steam.branch_password = value,
+            "STEAM_USER" => settings.steam.user = value,
+            "STEAM_PASSWORD" => settings.steam.password = value,
+            "STEAM_GUARD_CODE" => settings.steam.guard_code = value,
+            "STEAM_SKIP_INSTALL" => settings.steam.skip_install = value == "true",
             _ => continue,
         }
     }
