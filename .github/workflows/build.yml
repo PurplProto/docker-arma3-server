@@ -1,0 +1,34 @@
+on: [push]
+
+name: Build project
+
+jobs:
+  build_launcher_app:
+    name: Build launcher app
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+      - name: Lint
+        run: rustfmt --check ./launcher-app/src/main.rs
+      - name: Run cargo check
+        uses: actions-rs/cargo@v1
+        with:
+          command: check
+          args: --manifest-path ./launcher-app/Cargo.toml
+      - name: Run cargo build
+        uses: actions-rs/cargo@v1
+        with:
+          command: build
+          args: --manifest-path ./launcher-app/Cargo.toml --release --all-features --target 'x86_64-unknown-linux-gnu'
+      - name: Rename artifact
+        run: mv launcher-app/target/x86_64-unknown-linux-gnu/release/docker-arma3-server-launcher-app launcher-app/target/x86_64-unknown-linux-gnu/release/launcher
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v3.1.0
+        with:
+          name: launcher
+          path: launcher-app/target/x86_64-unknown-linux-gnu/release/launcher
+          if-no-files-found: error
+          retention-days: 7
