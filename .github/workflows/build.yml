@@ -23,10 +23,12 @@ jobs:
         with:
           command: build
           args: --manifest-path ./launcher-app/Cargo.toml --release --all-features --target 'x86_64-unknown-linux-gnu'
+      - name: Rename artifact
+        run: mv launcher-app/target/x86_64-unknown-linux-gnu/release/docker-arma3-server-launcher-app launcher-app/target/x86_64-unknown-linux-gnu/release/launcher
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v3.1.0
         with:
           name: launcher
-          path: launcher-app/target/x86_64-unknown-linux-gnu/release/docker-arma3-server-launcher-app
+          path: launcher-app/target/x86_64-unknown-linux-gnu/release/launcher
           if-no-files-found: error
           retention-days: 7
