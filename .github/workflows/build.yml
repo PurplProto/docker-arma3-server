@@ -11,6 +11,8 @@ jobs:
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
+      - name: Lint
+        run: rustfmt --check ./launcher-app/src/main.rs
       - name: Run cargo check
         uses: actions-rs/cargo@v1
         with:
