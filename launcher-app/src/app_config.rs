@@ -4,7 +4,6 @@ use std::env;
 pub(crate) struct PreLaunchSettings {
     pub extra_packages: String,
     pub mods_run_from_arma_dir: bool,
-    pub mods_should_load: bool,
 }
 
 #[derive(Debug)]
@@ -16,6 +15,7 @@ pub(crate) struct ArmaSettings {
     pub arma_world: String,
     pub arma_limitfps: String,
     pub arma_headless_clients: String,
+    pub arma_load_mods: bool,
 }
 
 #[derive(Debug)]
@@ -42,7 +42,6 @@ pub(crate) fn parse_env_vars() -> AppConfig {
         pre_launch: PreLaunchSettings {
             extra_packages: "".to_string(),
             mods_run_from_arma_dir: true,
-            mods_should_load: true,
         },
         arma: ArmaSettings {
             arma_binary: "".to_string(),
@@ -52,6 +51,7 @@ pub(crate) fn parse_env_vars() -> AppConfig {
             arma_limitfps: "".to_string(),
             arma_profile: "".to_string(),
             arma_world: "".to_string(),
+            arma_load_mods: true,
         },
         steam: SteamSettings {
             steam_branch: "".to_string(),
@@ -69,7 +69,6 @@ pub(crate) fn parse_env_vars() -> AppConfig {
             "MODS_RUN_FROM_ARMA_DIR" => {
                 settings.pre_launch.mods_run_from_arma_dir = value == "true"
             }
-            "MODS_SHOULD_LOAD" => settings.pre_launch.mods_should_load = value == "true",
             "ARMA_BINARY" => {
                 let is_standard_bin_name = value.contains("arma3server");
                 if !is_standard_bin_name {
@@ -83,6 +82,7 @@ pub(crate) fn parse_env_vars() -> AppConfig {
             "ARMA_LIMITFPS" => settings.arma.arma_limitfps = value,
             "ARMA_PROFILE" => settings.arma.arma_profile = value,
             "ARMA_WORLD" => settings.arma.arma_world = value,
+            "ARMA_LOAD_MODS" => settings.arma.arma_load_mods = value == "true",
             "STEAM_BRANCH" => settings.steam.steam_branch = value,
             "STEAM_BRANCH_PASSWORD" => settings.steam.steam_branch_password = value,
             "STEAM_USER" => settings.steam.steam_user = value,
