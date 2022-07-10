@@ -1,4 +1,6 @@
-# docker-arma3-server
+# Docker ArmA 3 Server
+
+[![Build project](https://github.com/PurplProto/docker-arma3-server/actions/workflows/build.yml/badge.svg)](https://github.com/PurplProto/docker-arma3-server/actions/workflows/build.yml)
 
 A flexible ArmA 3 dedicated server in Docker.
 
