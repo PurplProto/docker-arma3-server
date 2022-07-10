@@ -36,6 +36,8 @@ pub(crate) struct AppConfig {
 }
 
 pub(crate) fn parse_env_vars() -> AppConfig {
+    info!("Parsing environment");
+
     let mut settings = AppConfig {
         pre_launch: PreLaunchSettings {
             extra_packages: "".to_string(),
