@@ -1,12 +1,11 @@
 #[macro_use]
 extern crate log;
-extern crate colored;
-extern crate pretty_env_logger;
+extern crate env_logger;
 mod app_config;
 mod pre_launch;
 
 fn main() {
-    pretty_env_logger::init();
+    env_logger::init_from_env("LOG_LEVEL");
     info!("Launcher app loaded.");
 
     let config = app_config::parse_env_vars();
